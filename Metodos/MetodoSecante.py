@@ -1,4 +1,4 @@
-from funcionesRespuesta import *
+from Metodos.funcionesRespuesta import *
 
 def funcionSecante(textfunc, a, b):
     
