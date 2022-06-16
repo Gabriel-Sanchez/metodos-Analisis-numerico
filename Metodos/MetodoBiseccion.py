@@ -4,11 +4,16 @@ def funcionBiseccion(textfunc, a, b):
     
     listaIteraciones = []
     
-    fa = funcResp(textfunc, float(a))
-    fb = funcResp(textfunc, float(b))
+    # fa = funcResp(textfunc, float(a))
+    # fb = funcResp(textfunc, float(b))
 
-    fa = float(fa[0])
-    fb = float(fb[0])
+    # fa = float(fa[0])
+    # fb = float(fb[0])
+    
+    x = float(a)
+    fa = eval(textfunc)
+    x = float(b)
+    fb = eval(textfunc)
 
     # variabFA.set(fa)
     # variabFB.set(fb)
@@ -19,8 +24,11 @@ def funcionBiseccion(textfunc, a, b):
 
     m = (a + (b - a) / 2)
 
-    fm = funcResp(textfunc, float(m))
-    fm = float(fm[0])
+    # fm = funcResp(textfunc, float(m))
+    # fm = float(fm[0])
+    
+    x = float(m)
+    fm = eval(textfunc)
 
     if (fa * fb) < 0:
         while (abs(fm)) > 0.00000001:
@@ -35,8 +43,11 @@ def funcionBiseccion(textfunc, a, b):
 
             m = (a + (b - a) / 2)
 
-            fm = funcResp(textfunc, float(m))
-            fm = float(fm[0])
+            # fm = funcResp(textfunc, float(m))
+            # fm = float(fm[0])
+            
+            x = float(m)
+            fm = eval(textfunc)
 
             i = i + 1
 
@@ -64,11 +75,11 @@ def funcionBiseccion(textfunc, a, b):
         
 
 
-resp = funcionBiseccion('( x ^ 3 ) + ( 4 * ( x ^ 2 ) ) - 10',1,2)
+# resp = funcionBiseccion('( x ^ 3 ) + ( 4 * ( x ^ 2 ) ) - 10',1,2)
 
-# print(resp['M']) 
-# print(resp) 
-print() 
+# # print(resp['M']) 
+# # print(resp) 
+# print() 
 
-for i in resp['ListIteraciones']:
-    print(i)
+# for i in resp['ListIteraciones']:
+#     print(i)

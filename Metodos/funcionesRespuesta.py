@@ -1,4 +1,7 @@
 import math
+from math import cos, sin, tan
+import decimal
+
 
 def funcResp(textfunc, x):
 
@@ -188,15 +191,19 @@ def iteracionesResp(i2, lista):
 
 
 def Dg(gx, x):
-    h = 0.000001
-    fxmenosh = funcResp(gx, (x - h))
-    fxmash = funcResp(gx, (x + h))
-    print("tiene el mas y meos h")
-    fxmash = float(fxmash[0])
-    fxmenosh = float(fxmenosh[0])
+    h = 0.000000000000001
+    # fxmenosh = funcResp(gx, (x - h))
+    
+    x = (x - h)
+    fxmenosh = eval(gx)
+    
+    x = (x + h)
+    # fxmash = funcResp(gx, (x + h))
+    fxmash = eval(gx)
+    
+    # fxmash = float(fxmash[0])
+    # fxmenosh = float(fxmenosh[0])
 
-    print(fxmenosh)
-    print(fxmash)
     Resp = ( fxmash - fxmenosh ) / (2 * h)
     return Resp
 

@@ -6,8 +6,11 @@ def funcionNewtonRaphson(textfx, x):
     
     i = 0
 
-    fx = funcResp(textfx, float(x))
-    fx = float(fx[0])
+    # fx = funcResp(textfx, float(x))
+    # fx = float(fx[0])
+    
+    x = float(x)
+    fx = eval(textfx)
 
     dg = float(Dg(textfx, float(x)))
     print("la derivada de dgx =", dg)
@@ -28,8 +31,12 @@ def funcionNewtonRaphson(textfx, x):
             #print("x va a tomar el valor de ", gx)
             #x = round(gx, 14)
 
-            fx = funcResp(textfx, float(x))
-            fx = float(fx[0])
+            # fx = funcResp(textfx, float(x))
+            # fx = float(fx[0])
+            x = float(x)
+            
+            fx = eval(textfx)
+            
 
             df = float(Dg(textfx, float(x)))
 
@@ -59,11 +66,11 @@ def funcionNewtonRaphson(textfx, x):
         return { 'M':x, 'FM':fx, 'FB':dg, 'FA':fx, 'ListIteraciones':listaIteraciones }
 
 
-resp = funcionNewtonRaphson('( x ^ 3 ) + ( 4 * ( x ^ 2 ) ) - 10',1)
+# resp = funcionNewtonRaphson('( x ^ 3 ) + ( 4 * ( x ^ 2 ) ) - 10',1)
 
-# print(resp['M']) 
-# print(resp) 
-print() 
+# # print(resp['M']) 
+# # print(resp) 
+# print() 
 
-for i in resp['ListIteraciones']:
-    print(i)
+# for i in resp['ListIteraciones']:
+#     print(i)

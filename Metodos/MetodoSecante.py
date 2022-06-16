@@ -3,12 +3,17 @@ from Metodos.funcionesRespuesta import *
 def funcionSecante(textfunc, a, b):
     
     listaIteraciones = []
-    
-    fa = funcResp(textfunc, float(a))
-    fb = funcResp(textfunc, float(b))
 
-    fa = float(fa[0])
-    fb = float(fb[0])
+    x = float(a)
+    fa = eval(textfunc)
+    x = float(b)
+    fb = eval(textfunc)
+    
+    # fa = funcResp(textfunc, float(a))
+    # fb = funcResp(textfunc, float(b))
+
+    # fa = float(fa[0])
+    # fb = float(fb[0])
 
     # variabFA.set(fa)
     # variabFB.set(fb)
@@ -17,8 +22,11 @@ def funcionSecante(textfunc, a, b):
 
     m = b - ((fb * (b - a)) / (fb - fa))
 
-    fm = funcResp(textfunc, float(m))
-    fm = float(fm[0])
+    # fm = funcResp(textfunc, float(m))
+    # fm = float(fm[0])
+    
+    x = float(m)
+    fm = eval(textfunc)
 
 
     while (abs(fm)) > 0.00000001:
@@ -35,8 +43,11 @@ def funcionSecante(textfunc, a, b):
         m = b - ((fb * (b - a)) / (fb - fa))
 
 
-        fm = funcResp(textfunc, float(m))
-        fm = float(fm[0])
+        # fm = funcResp(textfunc, float(m))
+        # fm = float(fm[0])
+
+        x = float(m)
+        fm = eval(textfunc)
 
         #df = float(Dg(textfunc, float(x)))
 
@@ -55,11 +66,11 @@ def funcionSecante(textfunc, a, b):
     return { 'M':m, 'FM':fm, 'FB':fb, 'FA':fa, 'ListIteraciones':listaIteraciones }
     
 
-resp = funcionSecante('( x ^ 3 ) + ( 4 * ( x ^ 2 ) ) - 10',1,2)
+# resp = funcionSecante('( x ^ 3 ) + ( 4 * ( x ^ 2 ) ) - 10',1,2)
 
-# print(resp['M']) 
-# print(resp) 
-print() 
+# # print(resp['M']) 
+# # print(resp) 
+# print() 
 
-for i in resp['ListIteraciones']:
-    print(i)
+# for i in resp['ListIteraciones']:
+#     print(i)

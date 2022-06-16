@@ -1,24 +1,25 @@
-from Metodos.funcionesRespuesta import *
+# from funcionesRespuesta import *
 
 def funcionReglaFalsa(textfunc, a, b):
     
     listaIteraciones = []
     
-    fa = funcResp(textfunc, float(a))
-    fb = funcResp(textfunc, float(b))
+    x = float(a)
+    fa = eval(textfunc)
+    x = float(b)
+    fb = eval(textfunc)
 
-    fa = float(fa[0])
-    fb = float(fb[0])
-
-    # variabFA.set(fa)
-    # variabFB.set(fb)
 
     i = 0
 
     m = b - ((fb * (b - a)) / (fb - fa))
 
-    fm = funcResp(textfunc, float(m))
-    fm = float(fm[0])
+    
+    
+    x = float(m)
+    fm = eval(textfunc)
+    
+  
 
     if (fa * fb) < 0:
         while (abs(fm)) > 0.00000001:
@@ -30,8 +31,11 @@ def funcionReglaFalsa(textfunc, a, b):
                 fb = fm
 
             m = b - ((fb * (b - a)) / (fb - fa))
-            fm = funcResp(textfunc, float(m))
-            fm = float(fm[0])
+            
+            x = float(m)
+            fm = eval(textfunc)
+            
+  
 
             i = i + 1
 
@@ -61,9 +65,9 @@ def funcionReglaFalsa(textfunc, a, b):
         
 
 
-resp = funcionReglaFalsa('( x ^ 3 ) + ( 4 * ( x ^ 2 ) ) - 10',1,2)
+# resp = funcionReglaFalsa('( x ** 3 ) + ( 4 * ( x ** 2 ) ) - 10',1,2)
 
-print(resp)
+# print(resp)
 
-for i in resp['ListIteraciones']:
-    print(i)
+# for i in resp['ListIteraciones']:
+#     print(i)

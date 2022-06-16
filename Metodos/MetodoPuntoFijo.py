@@ -49,11 +49,11 @@ def funcionPuntoFijo(textfx, textgx, x):
         return { 'M':0, 'FM':0, 'FB':fx, 'FA':dg, 'ListIteraciones':listaIteraciones }
 
 
-resp = funcionPuntoFijo('( x ^ 3 ) + ( 4 * ( x ^ 2 ) ) - 10',1,2)
+# resp = funcionPuntoFijo('( x ^ 3 ) + ( 4 * ( x ^ 2 ) ) - 10',1,2)
 
-# print(resp['M']) 
-# print(resp) 
-print() 
+# # print(resp['M']) 
+# # print(resp) 
+# print() 
 
-for i in resp['ListIteraciones']:
-    print(i)
+# for i in resp['ListIteraciones']:
+#     print(i)
