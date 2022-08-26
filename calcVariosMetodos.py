@@ -1,8 +1,34 @@
 from tkinter import *
 import math
 
+
+from Metodos.MetodoReglaFalsa import funcionReglaFalsa
+from Metodos.MetodoBiseccion import funcionBiseccion
+from Metodos.MetodoNewtonRaphson import funcionNewtonRaphson
+from Metodos.MetodoSecante import funcionSecante
+from Metodos.MetodoMuller import funcionMuller
+from Metodos.MetodoPuntoFijo import funcionPuntoFijo
+
+
+
 ventana = Tk()
 ventana.title("Metodos de Analisis Numerico")
+
+
+def llamaMetodo(respMetodo):
+    
+        
+    variabFB.set(respMetodo['FB'])
+    variabFA.set(respMetodo['FA'])
+    
+    i = 0
+    for info in respMetodo['ListIteraciones']:
+        i = i + 1
+        print(info)
+        areatexo.insert(str(float(i)), info)
+
+    variabM.set(respMetodo['M'])
+    variabFM.set(respMetodo['FM'])
 
 def Corta_Fx_Gx_or_a_y_b(texto):
     listabuscar = texto.split(" ")
@@ -54,7 +80,8 @@ def funVariables(textfunc, X):
         fx = FxGX
         x = a_y_b[0]
         y = a_y_b[1]
-        funcionReglaFalsa(fx, float(x), float(y))
+        # funcionReglaFalsa(fx, float(x), float(y))
+        llamaMetodo(funcionReglaFalsa(fx, float(x), float(y)))
         print("va a realizar la Regla Falsa")
 
     elif varRadioBut.get() == 2:
@@ -66,25 +93,26 @@ def funVariables(textfunc, X):
 
         print("va a realizar el punto fijo")
         
-        funcionPuntoFijo(fx, gx, float(X))
+        llamaMetodo(funcionPuntoFijo(fx, gx, float(X)))
     elif varRadioBut.get() == 3:
 
         fx = FxGX
         print("va a realizar newton Rapson")
-        funcionNewtonRaphson(fx, float(X))
+        llamaMetodo(funcionNewtonRaphson(fx, float(X)))
     elif varRadioBut.get() == 4:
         fx = FxGX
         x = a_y_b[0]
         y = a_y_b[1]
         print("biseccion")
-        funcionBiseccion(fx, float(x), float(y))
+        llamaMetodo(funcionBiseccion(fx, float(x), float(y)))
     elif varRadioBut.get() == 5:
         print("")
 
         fx = FxGX
         x = a_y_b[0]
         y = a_y_b[1]
-        funcionMuller(fx, float(x), float(y))
+        # funcionMuller(fx, float(x), float(y))
+        llamaMetodo(funcionMuller(fx, float(x), float(y)))
 
 
 
@@ -94,7 +122,7 @@ def funVariables(textfunc, X):
         x = a_y_b[0]
         y = a_y_b[1]
         print("secante")
-        funcionSecante(fx, float(x), float(y))
+        llamaMetodo(funcionSecante(fx, float(x), float(y)))
 
 
     else:
@@ -112,60 +140,60 @@ def sgn(x):
         return 0
 
 
-def funcionMuller(textfunc, x1, x2):
+# def funcionMuller(textfunc, x1, x2):
 
-    fx = funcResp(textfunc, float(x2))
-    fx = float(fx[0])
+#     fx = funcResp(textfunc, float(x2))
+#     fx = float(fx[0])
 
-    df = float(Dg(textfunc, float(x2)))
+#     df = float(Dg(textfunc, float(x2)))
 
-    x3 = x2 - (fx / df)
+#     x3 = x2 - (fx / df)
 
-    fxo = funcResp(textfunc, float(x2))
-    fxo = float(fxo[0])
+#     fxo = funcResp(textfunc, float(x2))
+#     fxo = float(fxo[0])
 
-    variabFB.set(fx)
-    variabFA.set(fxo)
+#     variabFB.set(fx)
+#     variabFA.set(fxo)
 
-    fx4 = fx
+#     fx4 = fx
 
-    i = 0
+#     i = 0
 
-    while (abs(fx4)) > 0.00000001:
-        y1 = funcResp(textfunc, float(x1))
-        y1 = float(y1[0])
+#     while (abs(fx4)) > 0.00000001:
+#         y1 = funcResp(textfunc, float(x1))
+#         y1 = float(y1[0])
 
-        y2 = funcResp(textfunc, float(x2))
-        y2 = float(y2[0])
+#         y2 = funcResp(textfunc, float(x2))
+#         y2 = float(y2[0])
 
-        y3 = funcResp(textfunc, float(x3))
-        y3 = float(y3[0])
+#         y3 = funcResp(textfunc, float(x3))
+#         y3 = float(y3[0])
 
-        c1 = ((y2 - y1) / (x2 - x1))
-        c2 = ((y3 - y2) / (x3 - x2))
+#         c1 = ((y2 - y1) / (x2 - x1))
+#         c2 = ((y3 - y2) / (x3 - x2))
 
-        d1 = ((c2 - c1) / (x2 - x1))
+#         d1 = ((c2 - c1) / (x2 - x1))
 
-        s = (c2 + (d1 * (x3 - x2)))
+#         s = (c2 + (d1 * (x3 - x2)))
 
-        x4 = (x3 - ((2 * y3) / (2 + (sgn(s) * (((s ** 2) -4 * y3 * d1) ** (1 / 2))))))
+#         x4 = (x3 - ((2 * y3) / (2 + (sgn(s) * (((s ** 2) -4 * y3 * d1) ** (1 / 2))))))
 
-        x1 = x2
-        x2 = x3
-        x3 = x4
+#         x1 = x2
+#         x2 = x3
+#         x3 = x4
 
-        i = i + 1
+#         i = i + 1
 
-        fx4 = funcResp(textfunc, float(x4))
-        fx4 = float(fx4[0])
+#         fx4 = funcResp(textfunc, float(x4))
+#         fx4 = float(fx4[0])
 
-        infoAImprimir = str(i) + "            \t " + str(round(x4, 13)) + "       \t\t" + str(round(fx4, 13)) + "\n"
-        areatexo.insert(str(float(i)), infoAImprimir)
+#         infoAImprimir = str(i) + "            \t " + str(round(x4, 13)) + "       \t\t" + str(round(fx4, 13)) + "\n"
+#         areatexo.insert(str(float(i)), infoAImprimir)
 
-        print(f"intento : {i}  error {fx4}")
+#         print(f"intento : {i}  error {fx4}")
 
-    variabM.set(x4)
-    variabFM.set(fx4)
+#     variabM.set(x4)
+#     variabFM.set(fx4)
 
 
 
@@ -215,150 +243,150 @@ def funcResp(textfunc, x):
 
 #-----------------------funcion que resuelve ------------
 
-def funcionReglaFalsa(textfunc, a, b):
-    fa = funcResp(textfunc, float(a))
-    fb = funcResp(textfunc, float(b))
+# def funcionReglaFalsa(textfunc, a, b):
+#     fa = funcResp(textfunc, float(a))
+#     fb = funcResp(textfunc, float(b))
 
-    fa = float(fa[0])
-    fb = float(fb[0])
+#     fa = float(fa[0])
+#     fb = float(fb[0])
 
-    variabFA.set(fa)
-    variabFB.set(fb)
+#     variabFA.set(fa)
+#     variabFB.set(fb)
 
-    i = 0
+#     i = 0
 
-    m = b - ((fb * (b - a)) / (fb - fa))
+#     m = b - ((fb * (b - a)) / (fb - fa))
 
-    fm = funcResp(textfunc, float(m))
-    fm = float(fm[0])
+#     fm = funcResp(textfunc, float(m))
+#     fm = float(fm[0])
 
-    if (fa * fb) < 0:
-        while (abs(fm)) > 0.00000001:
-            if (fa * fm) > 0:
-                a = m
-                fa = fm
-            else:
-                b = m
-                fb = fm
+#     if (fa * fb) < 0:
+#         while (abs(fm)) > 0.00000001:
+#             if (fa * fm) > 0:
+#                 a = m
+#                 fa = fm
+#             else:
+#                 b = m
+#                 fb = fm
 
-            m = b - ((fb * (b - a)) / (fb - fa))
-            fm = funcResp(textfunc, float(m))
-            fm = float(fm[0])
+#             m = b - ((fb * (b - a)) / (fb - fa))
+#             fm = funcResp(textfunc, float(m))
+#             fm = float(fm[0])
 
-            i = i + 1
+#             i = i + 1
 
-            infoAImprimir = str(i) + "            \t " + str(round(m, 13)) + "       \t\t" + str(round(fm, 13)) + "\n"
-            areatexo.insert(str(float(i)), infoAImprimir)
+#             infoAImprimir = str(i) + "            \t " + str(round(m, 13)) + "       \t\t" + str(round(fm, 13)) + "\n"
+#             areatexo.insert(str(float(i)), infoAImprimir)
 
-            print(f"intento : {i}  error {fm}")
-        print("la raiz es :", m, " con el error de  :", fm)
-        variabM.set(m)
-        variabFM.set(fm)
+#             print(f"intento : {i}  error {fm}")
+#         print("la raiz es :", m, " con el error de  :", fm)
+#         variabM.set(m)
+#         variabFM.set(fm)
 
-    else:
+#     else:
 
-        print("error ")
-        areatexo.insert("1.0", "Error, no hay raiz entre los puntos a y b")
-        variabM.set("")
-        variabFM.set("")
+#         print("error ")
+#         areatexo.insert("1.0", "Error, no hay raiz entre los puntos a y b")
+#         variabM.set("")
+#         variabFM.set("")
 
 
 
 
 #------------------funcion regla falsa----------
 
-def funcionBiseccion(textfunc, a, b):
-    fa = funcResp(textfunc, float(a))
-    fb = funcResp(textfunc, float(b))
+# def funcionBiseccion(textfunc, a, b):
+#     fa = funcResp(textfunc, float(a))
+#     fb = funcResp(textfunc, float(b))
 
-    fa = float(fa[0])
-    fb = float(fb[0])
+#     fa = float(fa[0])
+#     fb = float(fb[0])
 
-    variabFA.set(fa)
-    variabFB.set(fb)
+#     variabFA.set(fa)
+#     variabFB.set(fb)
 
-    i = 0
+#     i = 0
 
-    #m = b - ((fb * (b - a)) / (fb - fa))
+#     #m = b - ((fb * (b - a)) / (fb - fa))
 
-    m = (a + (b - a) / 2)
+#     m = (a + (b - a) / 2)
 
-    fm = funcResp(textfunc, float(m))
-    fm = float(fm[0])
+#     fm = funcResp(textfunc, float(m))
+#     fm = float(fm[0])
 
-    if (fa * fb) < 0:
-        while (abs(fm)) > 0.00000001:
-            if (fa * fm) > 0:
-                a = m
-                fa = fm
-            else:
-                b = m
-                fb = fm
+#     if (fa * fb) < 0:
+#         while (abs(fm)) > 0.00000001:
+#             if (fa * fm) > 0:
+#                 a = m
+#                 fa = fm
+#             else:
+#                 b = m
+#                 fb = fm
 
-            #m = b - ((fb * (b - a)) / (fb - fa))
+#             #m = b - ((fb * (b - a)) / (fb - fa))
 
-            m = (a + (b - a) / 2)
+#             m = (a + (b - a) / 2)
 
-            fm = funcResp(textfunc, float(m))
-            fm = float(fm[0])
+#             fm = funcResp(textfunc, float(m))
+#             fm = float(fm[0])
 
-            i = i + 1
+#             i = i + 1
 
-            infoAImprimir = str(i) + "            \t " + str(round(m, 13)) + "       \t\t" + str(round(fm, 13)) + "\n"
-            areatexo.insert(str(float(i)), infoAImprimir)
+#             infoAImprimir = str(i) + "            \t " + str(round(m, 13)) + "       \t\t" + str(round(fm, 13)) + "\n"
+#             areatexo.insert(str(float(i)), infoAImprimir)
 
-            print(f"intento : {i}  error {fm}")
-        print("la raiz es :", m, " con el error de  :", fm)
-        variabM.set(m)
-        variabFM.set(fm)
+#             print(f"intento : {i}  error {fm}")
+#         print("la raiz es :", m, " con el error de  :", fm)
+#         variabM.set(m)
+#         variabFM.set(fm)
 
-    else:
+#     else:
 
-        print("error ")
-        areatexo.insert("1.0", "Error, no hay raiz entre los puntos a y b")
-        variabM.set("")
-        variabFM.set("")
+#         print("error ")
+#         areatexo.insert("1.0", "Error, no hay raiz entre los puntos a y b")
+#         variabM.set("")
+#         variabFM.set("")
 
 #---------------funcion Biseccion-------------
 
 
-def funcionPuntoFijo(textfx, textgx, x):
-    i = 0
+# def funcionPuntoFijo(textfx, textgx, x):
+#     i = 0
 
-    fx = funcResp(textfx, float(x))
-    fx = float(fx[0])
+#     fx = funcResp(textfx, float(x))
+#     fx = float(fx[0])
 
-    dg = float(Dg(textgx, float(x)))
-    print("la derivada de dgx =", dg)
+#     dg = float(Dg(textgx, float(x)))
+#     print("la derivada de dgx =", dg)
 
-    variabFA.set(fx)
-    variabFB.set(dg)
+#     variabFA.set(fx)
+#     variabFB.set(dg)
 
-    if abs(dg) < 1:
-        print("la derivada es menor que 1")
-        while (abs(fx)) > 0.00000001:
-            print("sigue siendo mayor")
-            gx = funcResp(textgx, float(x))
-            gx = float(gx[0])
-            print("x va a tomar el valor de ", gx)
-            x = round(gx, 14)
+#     if abs(dg) < 1:
+#         print("la derivada es menor que 1")
+#         while (abs(fx)) > 0.00000001:
+#             print("sigue siendo mayor")
+#             gx = funcResp(textgx, float(x))
+#             gx = float(gx[0])
+#             print("x va a tomar el valor de ", gx)
+#             x = round(gx, 14)
 
-            fx = funcResp(textfx, float(x))
-            fx = float(fx[0])
-            i = i + 1
-            infoAImprimir = str(i) + "  \t   " + str(round(x, 13)) + "    \t\t" + str(round(fx, 13)) + "    \t\t" + str(round(gx, 13)) + "\n"
-            areatexo.insert(str(float(i)), infoAImprimir)
-            print(f"intento : {i}  error {fx}")
-        print("la raiz es :", x, " con el error de  :", fx)
-        variabM.set(x)
-        variabFM.set(fx)
+#             fx = funcResp(textfx, float(x))
+#             fx = float(fx[0])
+#             i = i + 1
+#             infoAImprimir = str(i) + "  \t   " + str(round(x, 13)) + "    \t\t" + str(round(fx, 13)) + "    \t\t" + str(round(gx, 13)) + "\n"
+#             areatexo.insert(str(float(i)), infoAImprimir)
+#             print(f"intento : {i}  error {fx}")
+#         print("la raiz es :", x, " con el error de  :", fx)
+#         variabM.set(x)
+#         variabFM.set(fx)
 
-    else:
+#     else:
 
-        print("error ")
-        areatexo.insert("1.0", "Error, no hay convergencia con x0")
-        variabM.set("")
-        variabFM.set("")
+#         print("error ")
+#         areatexo.insert("1.0", "Error, no hay convergencia con x0")
+#         variabM.set("")
+#         variabFM.set("")
 
 
 
@@ -366,103 +394,103 @@ def funcionPuntoFijo(textfx, textgx, x):
 
 #--------------------funcion punto fijo---------
 
-def funcionNewtonRaphson(textfx, x):
-    i = 0
+# def funcionNewtonRaphson(textfx, x):
+#     i = 0
 
-    fx = funcResp(textfx, float(x))
-    fx = float(fx[0])
+#     fx = funcResp(textfx, float(x))
+#     fx = float(fx[0])
 
-    dg = float(Dg(textfx, float(x)))
-    print("la derivada de dgx =", dg)
+#     dg = float(Dg(textfx, float(x)))
+#     print("la derivada de dgx =", dg)
 
-    variabFA.set(fx)
-    variabFB.set(dg)
+#     variabFA.set(fx)
+#     variabFB.set(dg)
 
-    if abs(dg) != 0:
-        print("la derivada es diferente de 0")
-
-
+#     if abs(dg) != 0:
+#         print("la derivada es diferente de 0")
 
 
-        while (abs(fx)) > 0.00000001:
-            print("sigue siendo mayor")
-            #gx = funcResp(textgx, float(x))
-            #gx = float(gx[0])
-            #print("x va a tomar el valor de ", gx)
-            #x = round(gx, 14)
 
-            fx = funcResp(textfx, float(x))
-            fx = float(fx[0])
 
-            df = float(Dg(textfx, float(x)))
+#         while (abs(fx)) > 0.00000001:
+#             print("sigue siendo mayor")
+#             #gx = funcResp(textgx, float(x))
+#             #gx = float(gx[0])
+#             #print("x va a tomar el valor de ", gx)
+#             #x = round(gx, 14)
 
-            x = x - (fx / df)
+#             fx = funcResp(textfx, float(x))
+#             fx = float(fx[0])
 
-            i = i + 1
-            infoAImprimir = str(i) + "  \t   " + str(round(x, 13)) + "    \t\t" + str(round(fx, 13)) + "    \t\t" + str(round(df, 13)) + "\n"
-            areatexo.insert(str(float(i)), infoAImprimir)
-            print(f"intento : {i}  error {fx}")
-        print("la raiz es :", x, " con el error de  :", fx)
-        variabM.set(x)
-        variabFM.set(fx)
+#             df = float(Dg(textfx, float(x)))
 
-    else:
+#             x = x - (fx / df)
 
-        print("error ")
-        areatexo.insert("1.0", "Error, no hay convergencia con x0")
-        variabM.set("")
-        variabFM.set("")
+#             i = i + 1
+#             infoAImprimir = str(i) + "  \t   " + str(round(x, 13)) + "    \t\t" + str(round(fx, 13)) + "    \t\t" + str(round(df, 13)) + "\n"
+#             areatexo.insert(str(float(i)), infoAImprimir)
+#             print(f"intento : {i}  error {fx}")
+#         print("la raiz es :", x, " con el error de  :", fx)
+#         variabM.set(x)
+#         variabFM.set(fx)
+
+#     else:
+
+#         print("error ")
+#         areatexo.insert("1.0", "Error, no hay convergencia con x0")
+#         variabM.set("")
+#         variabFM.set("")
 
 
 #-------------------newton Raphson----------
 
 
-def funcionSecante(textfunc, a, b):
-    fa = funcResp(textfunc, float(a))
-    fb = funcResp(textfunc, float(b))
+# def funcionSecante(textfunc, a, b):
+#     fa = funcResp(textfunc, float(a))
+#     fb = funcResp(textfunc, float(b))
 
-    fa = float(fa[0])
-    fb = float(fb[0])
+#     fa = float(fa[0])
+#     fb = float(fb[0])
 
-    variabFA.set(fa)
-    variabFB.set(fb)
+#     variabFA.set(fa)
+#     variabFB.set(fb)
 
-    i = 0
+#     i = 0
 
-    m = b - ((fb * (b - a)) / (fb - fa))
+#     m = b - ((fb * (b - a)) / (fb - fa))
 
-    fm = funcResp(textfunc, float(m))
-    fm = float(fm[0])
-
-
-    while (abs(fm)) > 0.00000001:
-        print("sigue siendo mayor")
-        # gx = funcResp(textgx, float(x))
-        # gx = float(gx[0])
-        # print("x va a tomar el valor de ", gx)
-        # x = round(gx, 14)
-        b = a
-        fb = fa
-        a = m
-        fa = fm
-
-        m = b - ((fb * (b - a)) / (fb - fa))
+#     fm = funcResp(textfunc, float(m))
+#     fm = float(fm[0])
 
 
-        fm = funcResp(textfunc, float(m))
-        fm = float(fm[0])
+#     while (abs(fm)) > 0.00000001:
+#         print("sigue siendo mayor")
+#         # gx = funcResp(textgx, float(x))
+#         # gx = float(gx[0])
+#         # print("x va a tomar el valor de ", gx)
+#         # x = round(gx, 14)
+#         b = a
+#         fb = fa
+#         a = m
+#         fa = fm
 
-        #df = float(Dg(textfunc, float(x)))
+#         m = b - ((fb * (b - a)) / (fb - fa))
 
-        #x = x - (fx / df)
 
-        i = i + 1
-        infoAImprimir = str(i) + "  \t   " + str(round(m, 13)) + "    \t\t" + str(round(fm, 13))  + "\n"
-        areatexo.insert(str(float(i)), infoAImprimir)
-        print(f"intento : {i}  error {fm}")
-    print("la raiz es :", m, " con el error de  :", fm)
-    variabM.set(m)
-    variabFM.set(fm)
+#         fm = funcResp(textfunc, float(m))
+#         fm = float(fm[0])
+
+#         #df = float(Dg(textfunc, float(x)))
+
+#         #x = x - (fx / df)
+
+#         i = i + 1
+#         infoAImprimir = str(i) + "  \t   " + str(round(m, 13)) + "    \t\t" + str(round(fm, 13))  + "\n"
+#         areatexo.insert(str(float(i)), infoAImprimir)
+#         print(f"intento : {i}  error {fm}")
+#     print("la raiz es :", m, " con el error de  :", fm)
+#     variabM.set(m)
+#     variabFM.set(fm)
 
 
 #---------------- metodo secante ----------
