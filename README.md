@@ -2,7 +2,7 @@
 
 Análisis numérico
 
-metodos 
+métodos 
 
 - Bisección
 - Regla falsa
@@ -12,7 +12,7 @@ metodos
 - Secante
 
 
-funcion prueba:
+función prueba:
 
 
 `( x ** 3 ) + ( 4 * ( x ** 2 ) ) - 10`
